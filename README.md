@@ -13,9 +13,11 @@ Procédure de Push Pull sur le repo github :
 ## Définition du système du système optique
 La définition du système passe par l’écriture d’une chaîne de caractère utilisant les symbols du clavier pour représenter les dioptres:
 
-Exemples : 
+Exemples :
 - Lentille simple  “ () “
 - Plus de lentilles “ (() () )) “
+- autre dispo
+
 
 Les symbols disponibles : & ~ " # ' { ( [ ] ) - | _ \ / @ = + , ; . : § *
 ## Capacité à tracer les différents éléments du système
