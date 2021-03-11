@@ -7,3 +7,4 @@ Création du fichier txt d'édition des surfaces
 lecture du fichier txt et creation d'un csv pour le plot
 
 """
+# TODO instancier un system optique pour que berengere puisse plot quelque chose
