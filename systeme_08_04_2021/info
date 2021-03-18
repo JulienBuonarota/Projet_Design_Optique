@@ -1,0 +1,6 @@
+Voici la ligne a utiliser pour charger les données stocké dans data_pickel
+Je t'ai parlé de fichier csv mais au final ça sera du pickel. Je t'expliquerai pourquoi lors de notre prochaine réunion.
+Les données que tu va récupérer dans data sont sous la forme du "dataframe" de la bibliothèque pandas. Je te laisse regarder ça.
+
+with open("data_pickel", "rb") as file:
+        data = pickle.load(file)

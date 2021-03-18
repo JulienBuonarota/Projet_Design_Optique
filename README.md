@@ -2,6 +2,17 @@
 Projet de logiciel de calcul optique en python.
 
 C’est ici qu’on écrit la structure du projet.
+## Rendu intermédiaire du 08/04/2021
+Input utilisateur : 
+- Système optique = " () _ () _ ())"
+- Que des surfaces sphériques, de rayon variables
+- A réaliser : 
+  - Interpréation de la string d'entre (Julien)
+  - Plot des dioptres façon code V (Bérengère)
+  - Tracer les rayons (Julien)
+  - Plot des rayons (Bérengère)
+    
+https://matplotlib.org/stable/gallery/mplot3d/lines3d.html
 
 ## Liens importants
 Drop box : https://www.dropbox.com/sh/dlpbtrsl7c5js0k/AACg2vRWNldNmR4MMAzrymQGa?dl=0 
