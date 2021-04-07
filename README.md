@@ -15,8 +15,6 @@ Input utilisateur :
 https://matplotlib.org/stable/gallery/mplot3d/lines3d.html
 
 ## Liens importants
-Drop box : https://www.dropbox.com/sh/dlpbtrsl7c5js0k/AACg2vRWNldNmR4MMAzrymQGa?dl=0 
-
 Github : https://github.com/JulienBuonarota/Projet_Design_Optique
 
 Procédure de Push Pull sur le repo github : 
