@@ -103,3 +103,16 @@ Ecriture des donnes dans un fichier csv et lecture par le script de plot.
 
 ## Optimisation du système
 
+## Fonctionnement général du logiciel
+### première version avec lancé de rayons
+1) [utilisateur] création d'un fichier texte avec la string décrivant le système
+2) Création a partir de ce fichier texte de
+   - fichier csv de description des surfaces
+   - fichier csv de description des parametre d'etudes
+3) Editions de ces fichiers csv par l'utilisateur
+4) A partir des deux fichier csv (system, parametre d'etude)
+   - creation des rayons initiaux
+   - calcul de la propagation des rayons
+   - Plot du système optique
+     - avec ou sans rayons
+     - selon la coupe X ou Y 
