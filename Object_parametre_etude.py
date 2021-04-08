@@ -50,5 +50,5 @@ if __name__ == "__main__":
     print(objet)
 
     objet.save("test")
-    objet2 = parametre_etude().load("test")
+    objet2 = parametre_etude.load("test")
     print(objet2)

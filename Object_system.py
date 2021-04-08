@@ -6,6 +6,7 @@ import os
 import pickle
 import re
 import csv
+import ast
 import Object_surface
 import Object_parametre_etude
 
@@ -39,9 +40,11 @@ class system_optique():
             for s in d:
                 csv_writer.writerow(s)
 
-    def read_csv_dioptres(selfself):
-        # TODO lecture d'un fichier csv, utiliser la foncion de lecture de chaque objet dioptre
-        pass
+    def read_csv_dioptres(self):
+        with open(os.path.join(self.dossier, "dioptres.csv"), 'r') as csv_file:
+            csv_reader = csv.DictReader(csv_file)
+            for ligne, d in zip(csv_reader, self.dioptres):
+                d.update_from_csv(ligne)
 
     def save(self, dossier):
         with open(os.path.join(dossier, "system.pickle"), 'wb') as file:

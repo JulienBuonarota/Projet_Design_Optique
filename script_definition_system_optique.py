@@ -16,15 +16,18 @@ import pickle
 import Object_system
 import pathlib
 
-## Creation des elements de base du system
-
 ## Lecture d'un systeme optique et interpretation
 # TODO avoir la possibilite d'avoir input_string comme parametre d'entrée d'éxecution du script
 
 input_string = " () _ () _ () |"
-dossier = "test"
+dossier = "systeme_08_04_2021"
 
 system = Object_system.system_optique(dossier, input_string)
+
+## Chargement apres modification par l'utilisateur et enregistrement au format pickle
+system = Object_system.system_optique.load(dossier)
+system.read_csv_dioptres()
+system.save(system.dossier)
 
 
 ## compter les elements
@@ -32,22 +35,19 @@ system = Object_system.system_optique(dossier, input_string)
 # nb_dioptres = len(regex_dioptres.findall(input_string))
 #
 # ## creer la liste des elements (avec les object aproprie)
-# # TODO a placer dans la classe system, quand elle est faite
 #
 #
 # ## creation du fichier de configuration/specification
-# # TODO remplacer par la methode de la classe system, quand elle est faite
 # d = [i.__dict__ for i in Surfaces]
 # # Creation du fichier csv
-# with open("Surfaces.csv", 'a') as csv_file:
+# with open("dioptres.csv", 'a') as csv_file:
 #     csv_writer = csv.DictWriter(csv_file, fieldnames=d[0].keys())
 #     csv_writer.writeheader()
 #     for s in d:
 #         csv_writer.writerow(s)
 #
 # ## Lecture du csv et ecriture pickel
-# # TODO modifier par la methode de la classe system quand elle est faite
-# data = pd.read_csv("systeme_08_04_2021/Surfaces.csv")
+# data = pd.read_csv("systeme_08_04_2021/dioptres.csv")
 #
 # for i in ["origine", "angles"]:  # parametre d'origine et d'axe du repere associer a chaque surface
 #     data[i] = [ast.literal_eval(i) for i in data[i]]
