@@ -134,3 +134,5 @@ dmypy.json
 /.idea/misc.xml
 /.idea/.gitignore
 /journal.odp
+/.~lock.journal.odp#
+/.idea/csv-plugin.xml
