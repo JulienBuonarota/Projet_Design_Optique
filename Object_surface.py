@@ -31,4 +31,7 @@ S = Sphere(1)
 # methode objet.__dic__ pour acceder a l'objet en tant que dict
 # TODO inclure plusieur representation mathematique de la sphere (voir livre)
 
+# TODO Class plan
+# TODO y inclure les fonctions nécessaires au calcul de refraction
+#  F(P), Fp(P, C), normal(P)
 

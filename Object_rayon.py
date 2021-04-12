@@ -22,7 +22,7 @@ class Rayon():
         # passage dans le set des rayons calcule
         self.__class__.instances_non_calcule.difference_update({self})
         self.__class__.instances_calcule.add(self)
-
+    # TODO methode de tracer matplotlib (voir script trace rayon pour des idées)
 
 if __name__ == "__main__":
     for i in range(3):

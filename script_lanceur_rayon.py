@@ -14,7 +14,7 @@ for dioptres in system.dioptre:
 import numpy as np
 import matplotlib.pyplot as plt
 
-def Ray_tracing(P0, C0, O0, R, F, Fp, normal, n0, n1):
+def refraction(P0, C0, O0, R, F, Fp, normal, n0, n1):
     """
     Calcul du rayon réfracté par la surface définie par F.
 
@@ -108,7 +108,7 @@ O0 = np.array([0, 0, 20])
 n0 = 1
 n1 = 2
 
-Pf0, Cp0 = Ray_tracing(P0, C0, O0, R, F, Fp, normal, n0, n1)
+Pf0, Cp0 = refraction(P0, C0, O0, R, F, Fp, normal, n0, n1)
 # le dioptre
 z = np.linspace(0, 50, 100)
 plt.plot(z, (z - 20) - 5)
