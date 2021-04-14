@@ -1,5 +1,7 @@
 ##
 import ast
+import numpy as np
+import Outils_math as om
 
 # class new-style defini avec C(object) -> dans python 3, c'est new style par defaut
 class Sphere():
@@ -11,7 +13,7 @@ class Sphere():
                   Lentille biconvexe simple " () "
                   ( -> R<0
                   ) -> R>0
-        :param origine: (x, y, z)
+        :param origine: (x, y, z) dans le référenciel principal
         :param angles: (ax, ay, az) en radian
         """
         self.rayon = R
@@ -31,7 +33,55 @@ S = Sphere(1)
 # methode objet.__dic__ pour acceder a l'objet en tant que dict
 # TODO inclure plusieur representation mathematique de la sphere (voir livre)
 
-# TODO Class plan
-# TODO y inclure les fonctions nécessaires au calcul de refraction
-#  F(P), Fp(P, C), normal(P)
+class Plan():
+    # equation ax + by + cz + d = 0
+    def __init__(self, coeff, origine=(0, 0, 0), angles=(0, 0, 0)):
+        # coeff = (a, b, c, d)
+        self.coeff = coeff
+        self.origine = origine
+        self.angles = angles
+        self.R = om.matrice_rotation(*angles)
+
+
+    def F(self, P):
+        """
+        Equation du plan
+        ax + by + cz + d = F(P) = 0
+        :param P:
+        :return:
+        """
+        x, y, z = P
+        a, b, c, d = self.coeff
+        return a*x + b*y + c*z + d
+
+    def Fp(self, P, C):
+        """
+        (dF/dx)(P)*k + (dF/dy)(P)*l + (dF/dz)(P)*m
+        :param P:
+        :param C:
+        :return:
+        """
+        k, l, m = C
+        a, b, c, d = self.coeff
+        return a*k + b*l + c*m
+
+    def normal(self, P):
+        a, b, c, d = self.coeff
+        return np.array((a, b, c))
+
+    def coupe_x_0(self, hauteur):
+        # coupe du plan de ymax = hauteur
+        x0, y0, z0 = self.origine
+        a, b, c, d = self.coeff
+        z_1 = -1/c * (b*hauteur + d)
+        z_2 = -1/c * (-b*hauteur + d)
+        z = np.linspace(min(z_1, z_2), max(z_1, z_2), 100)
+        y = -1/b*(c*z + d) + y0
+        return z + z0, -1/b*(c*z + d) + y0
+
+
+
+
+
+
 
