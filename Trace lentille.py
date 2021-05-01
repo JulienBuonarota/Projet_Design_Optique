@@ -24,7 +24,6 @@ import numpy as np
 # plt.show()
 
 ##
-# TODO faire fonction
 # TODO intersection concave et convexe
 # TODO lecture fichier CSV
 import numpy as np

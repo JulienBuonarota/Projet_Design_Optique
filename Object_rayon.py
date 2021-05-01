@@ -34,6 +34,7 @@ class Rayon():
 #  soit recherche possible dans le set
 #  sinon utilisation de dataframe
 #  et/ou reference du rayon suivant, precedent dans le rayon
+
 if __name__ == "__main__":
     for i in range(3):
         r = Rayon(1, 2, 3, 4, 5, 6)

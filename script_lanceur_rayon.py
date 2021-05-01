@@ -17,33 +17,6 @@ import Object_surface as osur
 import Object_rayon as oray
 import Outils_lanceur_rayon as olr
 
-## Plot
-# b = 10
-# def F(P, C, b=10):
-#     # P = (x, y, z)
-#     return P[1] - b*P[2] + 5
-# def Fp(P, C, b=10):
-#     # P = (x, y, z)
-#     # C = (k, l, m)
-#     return C[1] - b*C[2]
-# def normal(P, b=10):
-#     return np.array([0, 1, -b])
-
-# alpha = 0
-# beta = 0
-# gamma = 0
-#
-# Rgamma = np.array([[np.cos(gamma), -np.sin(gamma), 0],
-#                    [np.sin(gamma), np.cos(gamma), 0],
-#                    [0, 0, 1]]).reshape((3,3))
-# Rbeta = np.array([[1, 0, 0],
-#                    [0, np.cos(beta), -np.sin(beta)],
-#                    [0, np.sin(beta), np.cos(beta)]]).reshape((3,3))
-# Ralpha = np.array([[np.cos(alpha), 0, -np.sin(alpha)],
-#                    [0, 1, 0],
-#                    [np.sin(alpha), 0, np.cos(alpha)]]).reshape((3,3))
-# R = np.matmul(Rgamma, np.matmul(Rbeta, Ralpha))
-
 ## rayon
 P0 = np.array([0, 1, 0])
 C0 = np.array([0, 1/np.sqrt(17), 4/np.sqrt(17)])
@@ -79,21 +52,7 @@ plt.plot(*rayon_1.represente())
 plt.plot(*rayon_2.represente())
 plt.plot(*rayon_3.represente())
 
-# # la rayon d'origine, de P0 à Pf0, ds la plan ZY
-# a = (Pf0[1] - P0[1])/(Pf0[2] - P0[2])
-# b = P0[1]
-# z = np.linspace(P0[2], Pf0[2], 100)
-# plt.plot(z, a*z + b)
-#
-# # la rayon refracte, de Pf0 dans la direction Cp0, ds la plan ZY
-# z = np.linspace(Pf0[2], Pf0[2] + 20, 100)
-# plt.plot(z, Cp0[1]/Cp0[2]*(z - Pf0[2]) + Pf0[1])
-#
-# # la rayon refracte, de Pf1 dans la direction Cp1, ds la plan ZY
-# z = np.linspace(Pf1[2], Pf1[2] + 20, 100)
-# plt.plot(z, Cp1[1]/Cp1[2]*(z - Pf1[2]) + Pf1[1])
 
-#plt.ylim(-1, 6)
 
 plt.grid()
 plt.show()

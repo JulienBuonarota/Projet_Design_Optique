@@ -35,7 +35,7 @@ def refraction(P0, C0, O0, R, F, Fp, normal, n0, n1):
     p = -P1[2]/C1[2] + sn
     # coordonnées de l'intersection
     Pi = P1 + C1*p
-    # vecteur orthogonal a la surface F en Pf
+    # vecteur orthogonal a la surface F en Pi
     r = normal(Pi)
 
     ## Find the change in direction of the ray refraction at surface S
