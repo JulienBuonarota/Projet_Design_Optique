@@ -34,7 +34,9 @@ class Rayon():
 #  soit recherche possible dans le set
 #  sinon utilisation de dataframe
 #  et/ou reference du rayon suivant, precedent dans le rayon
-
+# TODO methode de creation de rayon en mode "champ"
+#   par exemple, 10 rayons d'une même champ, réparti sur un hauteur y donné
+#   avoir ça comme classmethode pour pouvoir l'utiliser sans instancier un rayon
 if __name__ == "__main__":
     for i in range(3):
         r = Rayon(1, 2, 3, 4, 5, 6)

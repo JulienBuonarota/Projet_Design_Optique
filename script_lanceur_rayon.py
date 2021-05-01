@@ -25,7 +25,7 @@ rayon_1 = oray.Rayon(P0, C0, 1, 1, 1, 0)
 O0 = np.array([0, 0, 0])
 plan_1 = osur.Plan((0, 1, -1, 5), O0)
 ## SPhere
-sphere_1 = osur.Sphere(R=100, origine=(0,0,20))
+sphere_1 = osur.Sphere(R=50, origine=(0,0,20))
 ## Refraction
 n0 = 1
 n1 = 2

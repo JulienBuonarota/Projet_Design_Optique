@@ -1,5 +1,15 @@
 import numpy as np
 
+def interaction(rayon, surface):
+    # TODO calculé la refraction (ou reflexion ) du rayon sur la surface
+    #  set de l'arrive du rayon
+    #  creation du rayon suivant
+    pass
+
+def reflexion():
+    # TODO fct de reflexion
+    pass
+
 def refraction(P0, C0, O0, R, F, Fp, normal, n0, n1):
     """
     Calcul du rayon réfracté par la surface définie par F.

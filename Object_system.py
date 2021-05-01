@@ -22,11 +22,13 @@ class system_optique():
         self.parametres.save(self.dossier)
         # Dioptres du system
         self.create_dioptres()
+        # TODO methode de creation des rayon initiaux (d'après les paramètres d'étude)
         self.write_csv_dioptres(self.dossier)
 
         self.save(self.dossier)
 
     def create_dioptres(self):
+        # TODO reconnaitre sphere et plan
         # fonction probablement plus complexe une fois les dioptres plus divers
         nb_dioptres = len(self.regex_dioptres.findall(self.system_string))
         self.dioptres = [Object_surface.Sphere() for i in range(nb_dioptres)]
@@ -55,3 +57,9 @@ class system_optique():
         with open(os.path.join(dossier, "system.pickle"), 'rb') as file:
             data = pickle.load(file)
         return data
+
+    def propagation(self):
+        # TODO tracer tout les rayons non calculés jusqu'à la surface N
+        #  creer au fur et à mesure les rayons refracte
+        #  utiliser la methode de refraction
+        pass
