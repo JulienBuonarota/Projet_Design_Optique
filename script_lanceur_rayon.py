@@ -74,3 +74,6 @@ plt.plot(z, Cp0[1]/Cp0[2]*(z - Pf0[2]) + Pf0[1])
 
 plt.grid()
 plt.show()
+
+##
+
