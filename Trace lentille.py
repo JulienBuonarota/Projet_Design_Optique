@@ -31,16 +31,6 @@ import numpy as np
 
 def arc_de_cercle(R, repere, angles):
     #Calcule un cercle à partir d'un rayon R, d'un repère (x0, y0, z0) et d'angles
-
-    import matplotlib.pyplot as plt
-
-    # from math import *
-
-    # R = 1
-    # x0 = 0
-    # y0 = 1
-    # z0 = 2
-    ##
     x0, y0, z0 = repere
     z = np.linspace(0, 3, 150)
 
@@ -63,12 +53,6 @@ def arc_de_cercle(R, repere, angles):
     ##
     return ztot + z0, ytot
 
-#plt.plot(ztot, ytot)
-#plt.plot(zd, ynd, color='k')
-#plt.plot(zd, ypd, color='k')
-#plt.axis("equal")
-#plt.grid()
-#plt.show()
 
 ##
 arc1_z, arc1_y = arc_de_cercle(2, (0,0,2), (0,0,0))

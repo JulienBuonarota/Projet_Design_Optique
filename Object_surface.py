@@ -2,8 +2,10 @@
 import ast
 import numpy as np
 import Outils_math as om
+import matplotlib.pyplot as plt
 
 # class new-style defini avec C(object) -> dans python 3, c'est new style par defaut
+## Sphere
 class Sphere():
     def __init__(self, R=10, origine=(0, 0, 0), angles=(0, 0, 0)):
         """
@@ -19,6 +21,7 @@ class Sphere():
         self.rayon = R
         self.origine = origine
         self.angles = angles
+        self.R = om.matrice_rotation(*angles)
 
     def __repr__(self):
         return "Surface sphérique de Rayon = {}, Repère = {}, Angles = {}"\
@@ -29,10 +32,57 @@ class Sphere():
             dict_dioptre[i] = ast.literal_eval(dict_dioptre[i])
         self.__dict__.update(dict_dioptre)
 
-S = Sphere(1)
-# methode objet.__dic__ pour acceder a l'objet en tant que dict
-# TODO inclure plusieur representation mathematique de la sphere (voir livre)
+    def F(self, P):
+        """
+        Equation de la sphère
+        x**2 + y**2 + (z - R)**2 - R**2
+        :param P: point dans l'espace (x, y, z)
+        :return: valeur numérique de F(x, y, z)
+        """
+        x, y, z = P
+        return x**2 + y**2 + (z - self.rayon)**2 - self.rayon**2
 
+    def Fp(self, P, C):
+        """
+        (dF/dx)(P)*k + (dF/dy)(P)*l + (dF/dz)(P)*m
+        :param P: position dans l'espace (x, y, z)
+        :param C: vecteur (k, l, m)
+        :return:
+        """
+        k, l, m = C
+        R = self.rayon
+        x, y, z = P
+        return 2*x*k + 2*y*l + 2*(z - R)*m
+    def normal(self, P):
+        R = self.rayon
+        x, y, z = P
+        return np.array([2*x, 2*y, 2*(z - R)])
+
+    def represente(self):
+        # Calcule un cercle à partir d'un rayon R, d'un repère (x0, y0, z0) et d'angles
+        x0, y0, z0 = self.origine
+        R = self.rayon
+        z = np.linspace(0, 3, 150)
+
+        if R > 0:
+            yp = np.sqrt(R ** 2 - (z - R) ** 2)
+            yn = -np.sqrt(R ** 2 - (z - R) ** 2)
+        else:
+            yp = np.sqrt(R ** 2 - (z + R) ** 2)
+            yn = -np.sqrt(R ** 2 - (z + R) ** 2)
+
+        # zd = z + z0
+        ypd = yp + y0
+        ynd = yn + y0
+
+        ytot = np.concatenate((np.flip(ypd), ynd))
+        if R < 0:
+            ztot = np.concatenate((-np.flip(z), -z))
+        else:
+            ztot = np.concatenate((np.flip(z), z))
+        return (ztot + z0, ytot)
+
+## Plan
 class Plan():
     # equation ax + by + cz + d = 0
     def __init__(self, coeff, origine=(0, 0, 0), angles=(0, 0, 0)):
@@ -47,8 +97,8 @@ class Plan():
         """
         Equation du plan
         ax + by + cz + d = F(P) = 0
-        :param P:
-        :return:
+        :param P: point dans l'espace (x, y, z)
+        :return: valeur numérique de F(x, y, z)
         """
         x, y, z = P
         a, b, c, d = self.coeff
@@ -70,7 +120,11 @@ class Plan():
         return np.array((a, b, c))
 
     def coupe_x_0(self, hauteur):
-        # coupe du plan de ymax = hauteur
+        """
+        coupe du plan de ymax = hauteur
+        :param hauteur: hauteur de la coupe
+        :return: z, y
+        """
         x0, y0, z0 = self.origine
         a, b, c, d = self.coeff
         z_1 = -1/c * (b*hauteur + d)
@@ -78,6 +132,13 @@ class Plan():
         z = np.linspace(min(z_1, z_2), max(z_1, z_2), 100)
         y = -1/b*(c*z + d) + y0
         return z + z0, -1/b*(c*z + d) + y0
+
+
+if __name__ == "__main__":
+    S = Sphere(10, (0,0,5), (0,0,0))
+    z, y = S.represente()
+    plt.plot(z, y)
+
 
 
 

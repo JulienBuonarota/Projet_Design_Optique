@@ -13,7 +13,7 @@ for dioptres in system.dioptre:
 ## import
 import numpy as np
 import matplotlib.pyplot as plt
-import Object_surface as os
+import Object_surface as osur
 import Outils_lanceur_rayon as olr
 
 ## Plot
@@ -48,18 +48,21 @@ P0 = np.array([0, 1, 0])
 C0 = np.array([0, 1/np.sqrt(17), 4/np.sqrt(17)])
 ## Plan
 O0 = np.array([0, 0, 0])
-plan_1 = os.Plan((0, 1, -1, 5), O0)
-
+plan_1 = osur.Plan((0, 1, -1, 5), O0)
+## SPhere
+sphere_1 = osur.Sphere(R=100, origine=(0,0,20))
 ## Refraction
 n0 = 1
 n1 = 2
 
 Pf0, Cp0 = olr.refraction(P0, C0, O0, plan_1.R, plan_1.F, plan_1.Fp, plan_1.normal, n0, n1)
+Pf1, Cp1 = olr.refraction(Pf0, Cp0, sphere_1.origine, sphere_1.R, sphere_1.F,
+                          sphere_1.Fp, sphere_1.normal, n0, n1)
 
 ## Plot
 # le dioptre
 plt.plot(*plan_1.coupe_x_0(20))
-
+plt.plot(*sphere_1.represente())
 # la rayon d'origine, de P0 à Pf0, ds la plan ZY
 a = (Pf0[1] - P0[1])/(Pf0[2] - P0[2])
 b = P0[1]
@@ -69,6 +72,10 @@ plt.plot(z, a*z + b)
 # la rayon refracte, de Pf0 dans la direction Cp0, ds la plan ZY
 z = np.linspace(Pf0[2], Pf0[2] + 20, 100)
 plt.plot(z, Cp0[1]/Cp0[2]*(z - Pf0[2]) + Pf0[1])
+
+# la rayon refracte, de Pf1 dans la direction Cp1, ds la plan ZY
+z = np.linspace(Pf1[2], Pf1[2] + 20, 100)
+plt.plot(z, Cp1[1]/Cp1[2]*(z - Pf1[2]) + Pf1[1])
 
 #plt.ylim(-1, 6)
 
