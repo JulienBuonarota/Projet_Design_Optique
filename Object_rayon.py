@@ -1,6 +1,4 @@
-# TODO Instancier quelques rayons a la main pour que berengere puisse avoir des truc a tracer
-# TODO exemple berengere
-
+import numpy as np
 
 class Rayon():
     instances_calcule = set()
@@ -22,7 +20,15 @@ class Rayon():
         # passage dans le set des rayons calcule
         self.__class__.instances_non_calcule.difference_update({self})
         self.__class__.instances_calcule.add(self)
-    # TODO methode de tracer matplotlib (voir script trace rayon pour des idées)
+
+    def represente(self):
+        # de depart a arrive, return z et y
+        x0, y0, z0 = self.origine
+        x1, y1, z1 = self.arrive
+        a = (y1 - y0)/(z1 - z0)
+        b = y0 - a*z0
+        z = np.linspace(z0, z1, 100)
+        return (z, a*z + b)
 
 # TODO trouver comment chercher rayon d'un chemin, d'un champ
 #  soit recherche possible dans le set

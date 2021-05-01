@@ -119,7 +119,7 @@ class Plan():
         a, b, c, d = self.coeff
         return np.array((a, b, c))
 
-    def coupe_x_0(self, hauteur):
+    def represente(self, hauteur):
         """
         coupe du plan de ymax = hauteur
         :param hauteur: hauteur de la coupe
@@ -131,7 +131,7 @@ class Plan():
         z_2 = -1/c * (-b*hauteur + d)
         z = np.linspace(min(z_1, z_2), max(z_1, z_2), 100)
         y = -1/b*(c*z + d) + y0
-        return z + z0, -1/b*(c*z + d) + y0
+        return (z + z0, -1/b*(c*z + d) + y0)
 
 
 if __name__ == "__main__":
