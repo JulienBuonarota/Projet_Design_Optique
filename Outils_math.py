@@ -11,3 +11,4 @@ def matrice_rotation(alpha, beta, gamma):
                        [0, 1, 0],
                        [np.sin(alpha), 0, np.cos(alpha)]]).reshape((3, 3))
     return np.matmul(Rgamma, np.matmul(Rbeta, Ralpha))
+

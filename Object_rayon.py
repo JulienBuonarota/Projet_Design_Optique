@@ -30,17 +30,32 @@ class Rayon():
         z = np.linspace(z0, z1, 100)
         return (z, a*z + b)
 
+    @classmethod
+    def creation_champ(self, nb_rayon, hauteur, angle, num_champ, longueur_onde, nb_surface_refraction=0, origine_surface):
+        """
+        :param angle: en radian
+        """
+        x0, y0, z0 = origine_surface
+        # plan ZY -> k=0
+        k, l, m = 0, np.sin(angle) ,np.cos(angle)
+        C = np.array((k, l, m))
+        # creation des rayons
+        for count, h in enumerate(np.linspace(-hauteur/2, hauteur/2, nb_rayon)):
+            # point d origine ds le repere de la surface
+            P = np.array((0, h, 0)) + origine_surface
+            # origine en avant de cette surface
+            P = P - 4*C
+            # Creation du rayon de meme num de champ mais de chamin different
+            Rayon(P, C, count, num_champ, longueur_onde, nb_surface_refraction)
+        
+
 # TODO trouver comment chercher rayon d'un chemin, d'un champ
 #  soit recherche possible dans le set
 #  sinon utilisation de dataframe
 #  et/ou reference du rayon suivant, precedent dans le rayon
-# TODO methode de creation de rayon en mode "champ"
-#   par exemple, 10 rayons d'une même champ, réparti sur un hauteur y donné
-#   avoir ça comme classmethode pour pouvoir l'utiliser sans instancier un rayon
+# TODO methode de creation de rayon en mode "champ" - a tester
+# TODO classmethod permettant d'obtenir une liste des representation de tout les rayons
+#  voir ca comme une dataframe ? ou avoir ca en option ? pour auqnd il est necessaire de faire des plot particulier.
 if __name__ == "__main__":
-    for i in range(3):
-        r = Rayon(1, 2, 3, 4, 5, 6)
-    r.set_arrive(1, 2)
-    print(r.instances_calcule)
-    print(r.instances_non_calcule)
+    Rayon.creation_champ(10, 3, 20*3.1415/180, 1, 1, 0, np.array((0,0,3))
 
