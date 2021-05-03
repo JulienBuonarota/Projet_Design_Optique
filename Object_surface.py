@@ -92,6 +92,9 @@ class Plan():
         self.angles = angles
         self.R = om.matrice_rotation(*angles)
 
+    def __repr__(self):
+        return "Plan d'origine = {}".format(self.origine)
+
 
     def F(self, P):
         """
@@ -133,7 +136,8 @@ class Plan():
         y = -1/b*(c*z + d) + y0
         return (z + z0, -1/b*(c*z + d) + y0)
 
-
+# TODO fct represente qui regarde les rayons qui on traversé la surface
+#  en déduire la partie du dioptre à plot
 if __name__ == "__main__":
     S = Sphere(10, (0,0,5), (0,0,0))
     z, y = S.represente()
