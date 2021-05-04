@@ -1,23 +1,32 @@
 ##
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 ##
 class Rayon():
-    # TODO remplacer par dataframe
-    instances_calcule = set()
-    instances_non_calcule = set()
+    instances = []
+    # nb de rayon a calculer
+    nb_calcule = 0
 
-
-    def __init__(self, origine, direction, chemin, champ, longueur_onde, nb_surface_refraction):
+    def __init__(self, origine, direction, chemin, champ, longueur_onde, nb_surface_refraction, interaction):
         self.origine = origine
         self.direction = direction
         self.chemin = chemin  # meme que le rayon incident
         self.champ = champ  # meme que le rayon incident
         self.longueur_onde = longueur_onde # meme que le rayon incident
         self.surface_origine = nb_surface_refraction
-        # ajout a la liste des instances de la classe
-        self.__class__.instances_non_calcule.add(self)
+        self.interaction = interaction
+        self.calcule = False
+        # list des instance
+        self.__class__.instances.append(self)
+        self.__class__.nb_calcule += 1
+        # ajout a la dataframe des instances de la classe
+        # d = self.__dict__
+        # d['calcule'] = False
+        # d['instance'] = id(self)
+        # self.__class__.df_rayon = self.__class__.df_rayon.append(d, ignore_index=True)
+        # self.__class__.instances_non_calcule.add(self)
 
     def __repr__(self):
         try:
@@ -27,13 +36,24 @@ class Rayon():
             return "rayon d'origine = {}, de direction {}" \
                 .format(self.origine, self.direction)
 
+    def __eq__(self, other):
+        b = (self.origine == other.origine)
+        b += (self.direction == other.direction)
+        b += (self.chemin == other.chemin)
+        b += (self.champ == other.champ)
+        b += (self.longueur_onde == other.longueur_onde)
+        b += (self.surface_origine == other.surface_origine)
+        b += (self.interaction == other.interaction)
+        if b == 7:
+            return True
+        else:
+            return False
 
     def set_arrive(self, arrive, nb_surface_arrive):
         self.arrive = arrive
         self.surface_arrive = nb_surface_arrive
-        # passage dans le set des rayons calcule
-        self.__class__.instances_non_calcule.difference_update({self})
-        self.__class__.instances_calcule.add(self)
+        self.calcule = True
+        self.__class__.nb_calcule -= 1
 
     def represente(self):
         # de depart a arrive, return z et y
@@ -46,6 +66,12 @@ class Rayon():
         b = y0 - a*z0
         z = np.linspace(z0, z1, 100)
         return (z, a*z + b)
+
+    def get_instances_df(self):
+        df_rayon = pd.DataFrame()
+        for i in self.__class__.instances:
+            df_rayon = df_rayon.append(i.__dict__, ignore_index=True)
+        return df_rayon
 
     @classmethod
     def creation_champ(self, nb_rayon, hauteur, angle, num_champ, longueur_onde, nb_surface_refraction=0, origine_surface=(0,0,0)):
@@ -65,22 +91,13 @@ class Rayon():
             # Creation du rayon de meme num de champ mais de chemin different
             r = Rayon(P, C, count, num_champ, longueur_onde, nb_surface_refraction)
         return r
+
 ##
-# TODO trouver comment chercher rayon d'un chemin, d'un champ
-#  soit recherche possible dans le set
-#  sinon utilisation de dataframe
-#  et/ou reference du rayon suivant, precedent dans le rayon
-
-# TODO methode de creation de rayon en mode "champ" - a tester
-
-# TODO classmethod permettant d'obtenir une liste des representation de tout les rayons
-#  voir ca comme une dataframe ? ou avoir ca en option ? pour auqnd il est necessaire de faire des plot particulier.
 if __name__ == "__main__":
-    # R = Rayon((0,0,0), (0,0,0), 1, 1, 1, 1)
-    R = Rayon.creation_champ(10, 3, 20*3.1415/180, 1, 1, 0, np.array((0,0,3)))
-    print(R.instances_non_calcule)
-    ##
-    for i in R.instances_non_calcule:
-        plt.plot(i.represente())
-    ##
+    R = Rayon((0,0,0), (0,0,0), 1, 1, 1, 1, "refraction")
+    R2 = Rayon((0, 0, 0), (0, 0, 0), 2, 1, 1, 1, "refraction")
+    R3 = Rayon((0, 0, 1), (0, 0, 0), 2, 1, 1, 1, "refraction")
+
+
+
 
