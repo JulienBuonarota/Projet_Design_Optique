@@ -4,6 +4,21 @@ def interaction(rayon, surface):
     # TODO calculé la refraction (ou reflexion ) du rayon sur la surface
     #  set de l'arrive du rayon
     #  creation du rayon suivant
+    # trois cas de figure : refraction, reflexion et stop
+    if surface.interaction == "refraction":
+        # refraction
+        Pf0, Cp0 = olr.refraction(rayon.origine, rayon.direction,
+                              surf.origine, surf.R, surf.F, surf.Fp, surf.normal, n0, n1)
+        # creation du rayon refacter et arret du rayon existant
+        rayon.set_arrive(arrive=Pf0, nb_surface_arrive=1)
+        oray.Rayon(Pf0, Cp0, rayon.chemin, rayon.champ, rayon.longueur_onde, rayon.surface_origine + 1)
+    elif surface.interaction == "reflexion":
+        pass
+    elif surface.interaction == "stop":
+        pass
+    else:
+        print("la surface : {} \n n'est pas de type connu".format(surface)
+        
     pass
 
 def reflexion():
