@@ -1,24 +1,8 @@
 import numpy as np
+import Object_rayon as oray
 
-def interaction(rayon, surface):
-    # TODO calculé la refraction (ou reflexion ) du rayon sur la surface
-    #  set de l'arrive du rayon
-    #  creation du rayon suivant
-    # trois cas de figure : refraction, reflexion et stop
-    if surface.interaction == "refraction":
-        # refraction
-        Pf0, Cp0 = olr.refraction(rayon.origine, rayon.direction,
-                              surf.origine, surf.R, surf.F, surf.Fp, surf.normal, n0, n1)
-        # creation du rayon refacter et arret du rayon existant
-        rayon.set_arrive(arrive=Pf0, nb_surface_arrive=1)
-        oray.Rayon(Pf0, Cp0, rayon.chemin, rayon.champ, rayon.longueur_onde, rayon.surface_origine + 1)
-    elif surface.interaction == "reflexion":
-        pass
-    elif surface.interaction == "stop":
-        pass
-    else:
-        print("la surface : {} \n n'est pas de type connu".format(surface)
-        
+def intersection():
+    # TODO fct calcul pts d'intersection entre un rayon et une surface
     pass
 
 def reflexion():
@@ -84,3 +68,27 @@ def refraction(P0, C0, O0, R, F, Fp, normal, n0, n1):
     Cp0 = np.matmul(R.T, Cp1)
     Pi0 = np.matmul(R.T, Pi) + O0
     return Pi0, Cp0
+
+
+def interaction(rayon, surface):
+    """
+    Refraction, reflexion  ou stop de rayon sur surface
+    :param rayon:
+    :param surface:
+    :return: None
+    """
+    if surface.interaction == "refraction":
+        # refraction
+        Pf0, Cp0 = refraction(rayon.origine, rayon.direction,
+                              surface.origine, surface.R, surface.F, surface.Fp, surface.normal,
+                              surface.materiaux[0].indice[rayon.longueur_onde],
+                              surface.materiaux[1].indice[rayon.longueur_onde])
+        # creation du rayon refacter et arret du rayon existant
+        rayon.set_arrive(arrive=Pf0, nb_surface_arrive=1)
+        oray.Rayon(Pf0, Cp0, rayon.chemin, rayon.champ, rayon.longueur_onde, rayon.surface_origine + 1)
+    elif surface.interaction == "reflexion":
+        pass
+    elif surface.interaction == "stop":
+        pass
+    else:
+        print("la surface : {} \n n'est pas de type connu".format(surface)

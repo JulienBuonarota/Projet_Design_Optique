@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 # class new-style defini avec C(object) -> dans python 3, c'est new style par defaut
 ## Sphere
 class Sphere():
-    def __init__(self, R=10, origine=(0, 0, 0), angles=(0, 0, 0)):
+    def __init__(self, R, materiaux, origine=(0, 0, 0), angles=(0, 0, 0)):
         """
         Dioptre sphérique
         :param R: rayon de la sphere. exp:
@@ -22,6 +22,8 @@ class Sphere():
         self.origine = origine
         self.angles = angles
         self.R = om.matrice_rotation(*angles)
+        # list de deux elements
+        self.materiaux = materiaux
 
     def __repr__(self):
         return "Surface sphérique de Rayon = {}, Repère = {}, Angles = {}"\
@@ -85,12 +87,13 @@ class Sphere():
 ## Plan
 class Plan():
     # equation ax + by + cz + d = 0
-    def __init__(self, coeff, origine=(0, 0, 0), angles=(0, 0, 0)):
+    def __init__(self, coeff, materiaux, origine=(0, 0, 0), angles=(0, 0, 0)):
         # coeff = (a, b, c, d)
         self.coeff = coeff
         self.origine = origine
         self.angles = angles
         self.R = om.matrice_rotation(*angles)
+        self.materiaux = materiaux
 
     def __repr__(self):
         return "Plan d'origine = {}".format(self.origine)

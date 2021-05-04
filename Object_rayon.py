@@ -21,12 +21,8 @@ class Rayon():
         # list des instance
         self.__class__.instances.append(self)
         self.__class__.nb_calcule += 1
-        # ajout a la dataframe des instances de la classe
-        # d = self.__dict__
-        # d['calcule'] = False
-        # d['instance'] = id(self)
-        # self.__class__.df_rayon = self.__class__.df_rayon.append(d, ignore_index=True)
-        # self.__class__.instances_non_calcule.add(self)
+
+
 
     def __repr__(self):
         try:

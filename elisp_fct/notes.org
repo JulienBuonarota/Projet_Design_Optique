@@ -1,3 +1,8 @@
+* Actions possible dans l'edition du system
+new
+load
+plot
+
 * Code elisp pour execute un scrip
 http://ergoemacs.org/emacs/elisp_perl_wrapper.htmlhttp://ergoemacs.org/emacs/elisp_perl_wrapper.html
 
@@ -11,3 +16,8 @@ This command calls the external script “wc”."
   (let (cmdStr)
     (setq cmdStr "/usr/bin/wc") ; full path to your script
     (shell-command-on-region startPos endPos cmdStr nil t nil t)))
+
+
+* Edition des csv
+possibilite de le faire en org-mode
+il faut activer le mode

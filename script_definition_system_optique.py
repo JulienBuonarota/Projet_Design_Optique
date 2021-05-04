@@ -1,10 +1,8 @@
 """ Dans le main
 
 Lecture de la chaine de définition, exp : " ((  () | ()"
-Déduction des groupes -> pas utile ici ? a faire dans emacs comme interface
-Création du fichier txt d'édition des surfaces
 
-lecture du fichier txt et creation d'un csv pour le plot
+Creation des csv d'edition des surface et csv parametre systeme
 
 """
 ## import
