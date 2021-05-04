@@ -10,6 +10,7 @@ import ast
 import Object_surface
 import Object_parametre_etude
 import Object_rayon as oray
+import Outils_lanceur_rayon as olray
 
 class system_optique():
     regex_dioptres = re.compile("[()]")
@@ -65,10 +66,11 @@ class system_optique():
         return data
 
     def propagation(self):
-        # TODO tracer tout les rayons non calculés jusqu'à la surface N
-        #  creer au fur et à mesure les rayons refracte
-        #  utiliser la methode de refraction
-        pass
+        # TODO faire un test de cette methode
+        while oray.Rayon.nb_calcule > 0:
+            for rayon in oray.Rayon.instances:
+                if rayon.calcule is False:
+                    olray.interaction(rayon, self.dioptres[rayon.surface_origine])
 
     # TODO fct qui plot le système entier
     #  utilisant les fct representation des differents obj
