@@ -66,3 +66,4 @@ class system_optique():
 
     # TODO fct qui plot le système entier
     #  utilisant les fct representation des differents obj
+    #  a prenant les styles depuis un fichier de config

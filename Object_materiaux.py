@@ -1,5 +1,5 @@
 
-
+##
 class Materiaux():
     def __init__(self, n0, l0, a):
         self.n0 = n0
@@ -11,5 +11,5 @@ class Materiaux():
         return self.n0 + self.a*(l - self.l0)
 
 AIR = Materiaux(1, 1, 0)
-VERRE = Materiaux(1.5, 500, 1e-3)
-# TODO prendre des valeurs realistes pour l'indice de l'air et l'eau
+BK7 = Materiaux(1.4281, 500, 1e-3)
+
