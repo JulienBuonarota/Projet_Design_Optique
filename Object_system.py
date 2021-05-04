@@ -63,3 +63,6 @@ class system_optique():
         #  creer au fur et à mesure les rayons refracte
         #  utiliser la methode de refraction
         pass
+
+    # TODO fct qui plot le système entier
+    #  utilisant les fct representation des differents obj
