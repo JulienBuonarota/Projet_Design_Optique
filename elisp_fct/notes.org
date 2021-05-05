@@ -2,7 +2,7 @@
 new
 load
 plot
-
+info -> donne les infos du system 
 * Code elisp pour execute un scrip
 http://ergoemacs.org/emacs/elisp_perl_wrapper.htmlhttp://ergoemacs.org/emacs/elisp_perl_wrapper.html
 

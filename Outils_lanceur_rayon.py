@@ -77,6 +77,7 @@ def interaction(rayon, surface):
     :param surface:
     :return: None
     """
+    # TODO methode a tester
     if surface.interaction == "refraction":
         # refraction
         Pf0, Cp0 = refraction(rayon.origine, rayon.direction,
@@ -91,4 +92,4 @@ def interaction(rayon, surface):
     elif surface.interaction == "stop":
         pass
     else:
-        print("la surface : {} \n n'est pas de type connu".format(surface)
+        print("la surface : {} \n n'est pas de type connu".format(surface))

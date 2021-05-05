@@ -13,7 +13,8 @@ import Object_rayon as oray
 import Outils_lanceur_rayon as olray
 
 class system_optique():
-    regex_dioptres = re.compile("[()]")
+    regex_dioptres = re.compile("[()/|\\\]")
+    # regex_dioptres = re.compile("[()]")
 
     def __init__(self, dossier, system_string):
         self.dossier = dossier
@@ -34,6 +35,16 @@ class system_optique():
         # fonction probablement plus complexe une fois les dioptres plus divers
         nb_dioptres = len(self.regex_dioptres.findall(self.system_string))
         self.dioptres = [Object_surface.Sphere() for i in range(nb_dioptres)]
+        self.dioptres = []
+        for i in self.regex_dioptres.findall(self.system_string):
+            if (i == "(" or i == ")"):
+                self.append(Objec_surface.Sphere)
+            elif(i == "\\" or i == "/"):
+                self.append(Object_surface.Miroir)
+            elif (i == "¦"):
+                self.append(Object_surface.Plan)
+            else:
+                print("Type de surface non reconnu")
 
     def write_csv_dioptres(self, dossier):
         # TODO remplacer par une dataframe, permet de facilement concatener toute les surfaces
@@ -75,3 +86,14 @@ class system_optique():
     # TODO fct qui plot le système entier
     #  utilisant les fct representation des differents obj
     #  a prenant les styles depuis un fichier de config
+
+if __name__ == "__main__":
+    # TODO fct general qui concatene des regex et les cherches ds un string
+    import re
+    system_string = " () |/ || (|\\ "
+    regex_dioptres = re.compile("[()/|\\\]")
+    nb_dioptres = len(regex_dioptres.findall(system_string))
+    print(system_string)
+    print(nb_dioptres)
+    for i in regex_dioptres.findall(system_string):
+        print(i)

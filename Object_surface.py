@@ -3,11 +3,11 @@ import ast
 import numpy as np
 import Outils_math as om
 import matplotlib.pyplot as plt
+import Object_materiaux as oma
 
-# class new-style defini avec C(object) -> dans python 3, c'est new style par defaut
 ## Sphere
 class Sphere():
-    def __init__(self, R, materiaux, origine=(0, 0, 0), angles=(0, 0, 0)):
+    def __init__(self, R=10, materiaux=[oma.AIR, oma.BK7], origine=(0, 0, 0), angles=(0, 0, 0)):
         """
         Dioptre sphérique
         :param R: rayon de la sphere. exp:
@@ -30,6 +30,8 @@ class Sphere():
             .format(self.rayon, self.origine, self.angles)
 
     def update_from_csv(self, dict_dioptre):
+        # TODO si erreur, acceder aux donnes selon les key du dioptre et pas
+        #  des infos du csv
         for i in dict_dioptre.keys():
             dict_dioptre[i] = ast.literal_eval(dict_dioptre[i])
         self.__dict__.update(dict_dioptre)
@@ -87,7 +89,7 @@ class Sphere():
 ## Plan
 class Plan():
     # equation ax + by + cz + d = 0
-    def __init__(self, coeff, materiaux, origine=(0, 0, 0), angles=(0, 0, 0)):
+    def __init__(self, coeff=(1,1,1,1), materiaux=[oma.AIR, oma.BK7], origine=(0, 0, 0), angles=(0, 0, 0)):
         # coeff = (a, b, c, d)
         self.coeff = coeff
         self.origine = origine

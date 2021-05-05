@@ -13,19 +13,34 @@ import ast
 import pickle
 import Object_system
 import pathlib
+import argparse
+import os
 
 ## Lecture d'un systeme optique et interpretation
 # TODO avoir la possibilite d'avoir input_string comme parametre d'entrée d'éxecution du script
+#  et dossier
+parser = argparse.ArgumentParser(prefix_chars='-')
+parser.add_argument("-d", "--dossier",
+                    help="Dossier contenant l'ensemble des fichiers du system",
+                    required=True)
+parser.add_argument("-s", "--system_string",
+                    help="String decrivant les dioptres du system",
+                    required=True)
+args = parser.parse_args()
 
-input_string = " () _ () _ () |"
-dossier = "systeme_08_04_2021"
+# creation du dossier
+try:
+    os.mkdir(args.dossier)
+except FileExistsError:
+    print("Dossier : {} deja  existant".format(args.dossier))
+
 
 system = Object_system.system_optique(dossier, input_string)
 
 ## Chargement apres modification par l'utilisateur et enregistrement au format pickle
-system = Object_system.system_optique.load(dossier)
-system.read_csv_dioptres()
-system.save(system.dossier)
+# system = Object_system.system_optique.load(dossier)
+# system.read_csv_dioptres()
+# system.save(system.dossier)
 
 
 ## compter les elements
