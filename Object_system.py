@@ -22,7 +22,6 @@ class system_optique():
         # Parametres du system
         self.parametres = Object_parametre_etude.parametre_etude()
         self.parametres.write_csv(self.dossier)
-        self.parametres.save(self.dossier)
         # Dioptres du system
         self.create_dioptres()
         # TODO methode de creation des rayon initiaux (d'après les paramètres d'étude)
@@ -38,11 +37,11 @@ class system_optique():
         self.dioptres = []
         for i in self.regex_dioptres.findall(self.system_string):
             if (i == "(" or i == ")"):
-                self.append(Objec_surface.Sphere)
+                self.dioptres.append(Object_surface.Sphere)
             elif(i == "\\" or i == "/"):
-                self.append(Object_surface.Miroir)
+                self.dioptres.append(Object_surface.Miroir)
             elif (i == "¦"):
-                self.append(Object_surface.Plan)
+                self.dioptres.append(Object_surface.Plan)
             else:
                 print("Type de surface non reconnu")
 

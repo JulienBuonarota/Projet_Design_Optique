@@ -35,7 +35,7 @@ except FileExistsError:
     print("Dossier : {} deja  existant".format(args.dossier))
 
 
-system = Object_system.system_optique(dossier, input_string)
+system = Object_system.system_optique(args.dossier, args.system_string)
 
 ## Chargement apres modification par l'utilisateur et enregistrement au format pickle
 # system = Object_system.system_optique.load(dossier)
