@@ -98,6 +98,7 @@ class Sphere():
                 setarr(self, i, dict_update[i])
         
     def get_dict(self):
+        # TODO gerer les materiaux
         # return un dict composer des info editable de l'objet
         d = {}
         current_state = self.__dict__
@@ -105,7 +106,6 @@ class Sphere():
             if i == "materiaux":
                 pass
             else:
-                
                 d[i] = current_state[i]
         return d
                 
@@ -113,6 +113,7 @@ class Sphere():
 ## Plan
 class Plan():
     # equation ax + by + cz + d = 0
+    editable = ["coeff", "origine", "angles", "materiaux", "interaction"]
     def __init__(self, coeff=(1,1,1,1), materiaux=[oma.AIR, oma.BK7], origine=(0, 0, 0), angles=(0, 0, 0), interaction="refraction"):
         # coeff = (a, b, c, d)
         self.coeff = coeff
@@ -151,7 +152,7 @@ class Plan():
         a, b, c, d = self.coeff
         return np.array((a, b, c))
 
-    def represente(self, hauteur):
+    def represente(self, hauteur=20):
         """
         coupe du plan de ymax = hauteur
         :param hauteur: hauteur de la coupe
@@ -164,6 +165,17 @@ class Plan():
         z = np.linspace(min(z_1, z_2), max(z_1, z_2), 100)
         y = -1/b*(c*z + d) + y0
         return (z + z0, -1/b*(c*z + d) + y0)
+
+    def get_dict(self):
+        # return un dict composer des info editable de l'objet
+        d = {}
+        current_state = self.__dict__
+        for i in self.__class__.editable:
+            if i == "materiaux":
+                pass
+            else:
+                d[i] = current_state[i]
+        return d
 
 # TODO fct represente qui regarde les rayons qui on traversé la surface
 #  en déduire la partie du dioptre à plot

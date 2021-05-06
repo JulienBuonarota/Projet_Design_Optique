@@ -34,41 +34,8 @@ system.dioptres = [plan_1, sphere_1, sphere_2]
 system.rayon = R
 ## propagation des rayons
 system.propagation()
-
-## Refraction
-#  surfaces = [plan_1, sphere_1]
-#  n0 = 1
-#  n1 = 2
-#  ##
-#  # TODO transforme cette boucle for en while (apres remplacement par df des set de la classe rayon)
-#  for rayon in R.instances_non_calcule:
-#      if rayon.surface_origine <= 1:
-#          surf = surfaces[rayon.surface_origine]
-#      else:
-#          print("rayon de sortie")
-#          continue
-#      # print("rayon de surface d'origine n = {}\n  surface choisi = {}".format(rayon.surface_origine, surf))
-#      Pf0, Cp0 = olr.refraction(rayon.origine, rayon.direction,
-#                                surf.origine, surf.R, surf.F, surf.Fp, surf.normal, n0, n1)
-#  
-#      rayon.set_arrive(arrive=Pf0, nb_surface_arrive=1)
-#      oray.Rayon(Pf0, Cp0, rayon.chemin, rayon.champ, rayon.longueur_onde, rayon.surface_origine + 1)
-#  
-
 ## Plot
-# le dioptre
-plt.plot(*plan_1.represente(20))
-plt.plot(*sphere_1.represente())
-plt.plot(*sphere_2.represente())
-
-for r in R.instances:
-    plt.plot(*r.represente())
-
-# for r in R.instances_non_calcule:
-#     plt.plot(*r.represente())
-
-plt.grid()
-plt.show()
+system.plot()
 
 ##
 

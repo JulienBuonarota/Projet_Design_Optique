@@ -11,6 +11,7 @@ import Object_surface
 import Object_parametre_etude
 import Object_rayon as oray
 import Outils_lanceur_rayon as olray
+import matplotlib.pyplot as plt
 
 # TODO methode load a partir d'un csv, pour pouvoir prendre en compte l'ajout
 #  de surface, ou deletion, par l'utilisateur (qui edite le csv)
@@ -82,15 +83,19 @@ class system_optique():
         return data
 
     def propagation(self):
-        # TODO faire un test de cette methode
         while oray.Rayon.nb_calcule > 0:
             for rayon in self.rayon.instances:  # oray.Rayon.instances:
                 if rayon.calcule is False:
                     olray.interaction(rayon, self.dioptres[rayon.surface_origine])
 
-    # TODO fct qui plot le système entier
-    #  utilisant les fct representation des differents obj
-    #  a prenant les styles depuis un fichier de config
+    def plot(self):
+        for i in self.dioptres:
+            plt.plot(*i.represente(), color='k')
+        for r in self.rayon.instances:
+            plt.plot(*r.represente(), color='r')
+        plt.grid()
+        plt.show()
+
 
 if __name__ == "__main__":
     # TODO fct general qui concatene des regex et les cherches ds un string
