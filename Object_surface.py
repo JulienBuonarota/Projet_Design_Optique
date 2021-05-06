@@ -7,7 +7,10 @@ import Object_materiaux as oma
 
 ## Sphere
 class Sphere():
-    def __init__(self, R=10, materiaux=[oma.AIR, oma.BK7], origine=(0, 0, 0), angles=(0, 0, 0)):
+    # list of editable elemenrts of this class
+    editable = ["rayon", "origine", "angles", "materiaux", "interaction"]
+    
+    def __init__(self, R=10, materiaux=[oma.AIR, oma.BK7], origine=(0, 0, 0), angles=(0, 0, 0), interaction="refraction"):
         """
         Dioptre sphérique
         :param R: rayon de la sphere. exp:
@@ -24,6 +27,7 @@ class Sphere():
         self.R = om.matrice_rotation(*angles)
         # list de deux elements
         self.materiaux = materiaux
+        self.interaction = interaction
 
     def __repr__(self):
         return "Surface sphérique de Rayon = {}, Repère = {}, Angles = {}"\
@@ -86,17 +90,37 @@ class Sphere():
             ztot = np.concatenate((np.flip(z), z))
         return (ztot + z0, ytot)
 
+    def update_from_dict(self, dict_update):
+        for i in self.__class__.editable:
+            if i == materiaux:
+                pass
+            else:
+                setarr(self, i, dict_update[i])
+        
+    def get_dict(self):
+        # return un dict composer des info editable de l'objet
+        d = {}
+        current_state = self.__dict__
+        for i in self.__class__.editable:
+            if i == "materiaux":
+                pass
+            else:
+                
+                d[i] = current_state[i]
+        return d
+                
+
 ## Plan
 class Plan():
     # equation ax + by + cz + d = 0
-    def __init__(self, coeff=(1,1,1,1), materiaux=[oma.AIR, oma.BK7], origine=(0, 0, 0), angles=(0, 0, 0)):
+    def __init__(self, coeff=(1,1,1,1), materiaux=[oma.AIR, oma.BK7], origine=(0, 0, 0), angles=(0, 0, 0), interaction="refraction"):
         # coeff = (a, b, c, d)
         self.coeff = coeff
         self.origine = origine
         self.angles = angles
         self.R = om.matrice_rotation(*angles)
         self.materiaux = materiaux
-
+        self.interaction = interaction
     def __repr__(self):
         return "Plan d'origine = {}".format(self.origine)
 
@@ -145,8 +169,9 @@ class Plan():
 #  en déduire la partie du dioptre à plot
 if __name__ == "__main__":
     S = Sphere(10, (0,0,5), (0,0,0))
-    z, y = S.represente()
-    plt.plot(z, y)
+    # z, y = S.represente()
+    # plt.plot(z, y)
+    print(S.__dict__)
 
 
 

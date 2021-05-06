@@ -36,7 +36,7 @@ except FileExistsError:
 
 
 system = Object_system.system_optique(args.dossier, args.system_string)
-
+system.save(system.dossier)
 ## Chargement apres modification par l'utilisateur et enregistrement au format pickle
 # system = Object_system.system_optique.load(dossier)
 # system.read_csv_dioptres()

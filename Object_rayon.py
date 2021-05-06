@@ -9,19 +9,18 @@ class Rayon():
     # nb de rayon a calculer
     nb_calcule = 0
 
-    def __init__(self, origine, direction, chemin, champ, longueur_onde, nb_surface_refraction, interaction):
+    def __init__(self, origine, direction, chemin, champ, longueur_onde, nb_surface_refraction):
         self.origine = origine
         self.direction = direction
         self.chemin = chemin  # meme que le rayon incident
         self.champ = champ  # meme que le rayon incident
         self.longueur_onde = longueur_onde # meme que le rayon incident
         self.surface_origine = nb_surface_refraction
-        self.interaction = interaction
+        # self.interaction = interaction
         self.calcule = False
         # list des instance
         self.__class__.instances.append(self)
         self.__class__.nb_calcule += 1
-
 
 
     def __repr__(self):

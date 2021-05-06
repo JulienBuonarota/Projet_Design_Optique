@@ -82,14 +82,16 @@ def interaction(rayon, surface):
         # refraction
         Pf0, Cp0 = refraction(rayon.origine, rayon.direction,
                               surface.origine, surface.R, surface.F, surface.Fp, surface.normal,
-                              surface.materiaux[0].indice[rayon.longueur_onde],
-                              surface.materiaux[1].indice[rayon.longueur_onde])
+                              surface.materiaux[0].indice(rayon.longueur_onde),
+                              surface.materiaux[1].indice(rayon.longueur_onde))
         # creation du rayon refacter et arret du rayon existant
+        # TODO ne pas avoir systematiquement 1 comme surface d'arrive
         rayon.set_arrive(arrive=Pf0, nb_surface_arrive=1)
         oray.Rayon(Pf0, Cp0, rayon.chemin, rayon.champ, rayon.longueur_onde, rayon.surface_origine + 1)
     elif surface.interaction == "reflexion":
         pass
     elif surface.interaction == "stop":
+        rayon.set_arrive(rayon.origine + 10 * rayon.direction, nb_surface_arrive=1)
         pass
     else:
         print("la surface : {} \n n'est pas de type connu".format(surface))
