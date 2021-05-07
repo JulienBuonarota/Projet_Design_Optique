@@ -33,7 +33,7 @@ class Sphere():
         return "Surface sphérique de Rayon = {}, Repère = {}, Angles = {}"\
             .format(self.rayon, self.origine, self.angles)
 
-    def update_from_csv(self, dict_dioptre):
+    def update_from_dict(self, dict_dioptre):
         # TODO si erreur, acceder aux donnes selon les key du dioptre et pas
         #  des infos du csv
         for i in dict_dioptre.keys():
@@ -101,6 +101,7 @@ class Sphere():
         # TODO gerer les materiaux
         # return un dict composer des info editable de l'objet
         d = {}
+        d["type_surface"] = "SPHERE"
         current_state = self.__dict__
         for i in self.__class__.editable:
             if i == "materiaux":
@@ -169,6 +170,7 @@ class Plan():
     def get_dict(self):
         # return un dict composer des info editable de l'objet
         d = {}
+        d["type_surface"] = "PLAN"
         current_state = self.__dict__
         for i in self.__class__.editable:
             if i == "materiaux":

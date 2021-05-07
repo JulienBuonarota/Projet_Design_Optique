@@ -7,6 +7,7 @@ import pickle
 import re
 import csv
 import ast
+import pandas as pd
 import Object_surface
 import Object_parametre_etude
 import Object_rayon as oray
@@ -52,17 +53,22 @@ class system_optique():
                 print("Type de surface non reconnu")
 
     def write_csv_dioptres(self, dossier):
-        # TODO remplacer par une dataframe, permet de facilement concatener toute les surfaces
-        #  (meme si pas meme attributs)
-        #  ATTENTION, SEPARATEUR = |
-        print(self.dioptres)
-        d = [i.get_dict() for i in self.dioptres]
-        # Creation du fichier csv
-        with open(os.path.join(self.dossier, "dioptres.csv"), 'w') as csv_file:
-            csv_writer = csv.DictWriter(csv_file, fieldnames=d[0].keys())
-            csv_writer.writeheader()
-            for s in d:
-                csv_writer.writerow(s)
+        #  # TODO remplacer par une dataframe, permet de facilement concatener toute les surfaces
+        #  #  (meme si pas meme attributs)
+        #  #  ATTENTION, SEPARATEUR = |
+        #  print(self.dioptres)
+        #  d = [i.get_dict() for i in self.dioptres]
+        #  # Creation du fichier csv
+        #  with open(os.path.join(self.dossier, "dioptres.csv"), 'w') as csv_file:
+        #      csv_writer = csv.DictWriter(csv_file, fieldnames=d[0].keys())
+        #      csv_writer.writeheader()
+        #      for s in d:
+        #          csv_writer.writerow(s)
+        df = pd.DataFrame()
+        for d in self.dioptres:
+            df = df.append(d.get_dict(), ignore_index=True)
+        nom_fichier = os.path.join(self.dossier, "dioptres.csv")
+        df.to_csv(nom_fichier, sep="|")
 
     def read_csv_dioptres(self):
         # TODO avoir la possibilite d'ecrire l'origine d'une surface d'apres celui de la surface precedente,
