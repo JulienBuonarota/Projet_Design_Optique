@@ -17,8 +17,6 @@ import argparse
 import os
 
 ## Lecture d'un systeme optique et interpretation
-# TODO avoir la possibilite d'avoir input_string comme parametre d'entrée d'éxecution du script
-#  et dossier
 parser = argparse.ArgumentParser(prefix_chars='-')
 parser.add_argument("-d", "--dossier",
                     help="Dossier contenant l'ensemble des fichiers du system",
@@ -36,7 +34,10 @@ except FileExistsError:
 
 
 system = Object_system.system_optique(args.dossier, args.system_string)
+system.create_dioptres()
+system.write_csv_dioptres(system.dossier)
 system.save(system.dossier)
+
 ## Chargement apres modification par l'utilisateur et enregistrement au format pickle
 # system = Object_system.system_optique.load(dossier)
 # system.read_csv_dioptres()

@@ -10,9 +10,11 @@ parser.add_argument("-d", "--dossier",
 args = parser.parse_args()
 
 ## Chargement apres modification par l'utilisateur et enregistrement au format pickle
-system = Object_system.system_optique.load(args.dossier)
-print(system.system_string)
+# system = Object_system.system_optique.load(args.dossier)
+# print(system.system_string)
+system = Object_system.system_optique(args.dossier, "")
 system.read_csv_dioptres()
-system.save(system.dossier)
+for i in system.dioptres:
+    i.repr_type()
 
 

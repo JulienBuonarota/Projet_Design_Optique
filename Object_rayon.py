@@ -82,7 +82,7 @@ class Rayon():
             # point d origine ds le repere de la surface
             P = np.array((0, h, 0)) + origine_surface
             # origine en avant de cette surface
-            P = P - 4*C
+            P = P - 10*C
             # Creation du rayon de meme num de champ mais de chemin different
             r = Rayon(P, C, count, num_champ, longueur_onde, nb_surface_refraction)
         return r

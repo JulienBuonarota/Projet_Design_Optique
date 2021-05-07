@@ -92,6 +92,5 @@ def interaction(rayon, surface):
         pass
     elif surface.interaction == "stop":
         rayon.set_arrive(rayon.origine + 10 * rayon.direction, nb_surface_arrive=1)
-        pass
     else:
         print("la surface : {} \n n'est pas de type connu".format(surface))

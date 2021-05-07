@@ -33,12 +33,30 @@ class Sphere():
         return "Surface sphérique de Rayon = {}, Repère = {}, Angles = {}"\
             .format(self.rayon, self.origine, self.angles)
 
-    def update_from_dict(self, dict_dioptre):
-        # TODO si erreur, acceder aux donnes selon les key du dioptre et pas
-        #  des infos du csv
-        for i in dict_dioptre.keys():
-            dict_dioptre[i] = ast.literal_eval(dict_dioptre[i])
-        self.__dict__.update(dict_dioptre)
+    def repr_type(self):
+        for key, value in self.__dict__.items():
+            print("nom : {}, valeur : {}, type : {}"
+                  .format(key, value, type(value)))
+
+    def update_from_dict(self, dict_update):
+        for i in self.__class__.editable:
+            if i == "materiaux":
+                l = []
+                for m in ast.literal_eval(dict_update[i].strip()):
+                    if m == 'AIR':
+                        l.append(oma.AIR)
+                    elif m == 'BK7':
+                        l.append(oma.BK7)
+                self.materiaux = l
+            elif i == "interaction":
+                self.__dict__[i] = dict_update[i].strip()
+            elif i == "rayon":
+                if isinstance(dict_update[i], np.float64):
+                    self.__dict__[i] = dict_update[i]
+                else:
+                    self.__dict__[i] = ast.literal_eval(dict_update[i].strip())
+            else:
+                self.__dict__[i] = ast.literal_eval(dict_update[i].strip())
 
     def F(self, P):
         """
@@ -61,6 +79,7 @@ class Sphere():
         R = self.rayon
         x, y, z = P
         return 2*x*k + 2*y*l + 2*(z - R)*m
+
     def normal(self, P):
         R = self.rayon
         x, y, z = P
@@ -90,13 +109,6 @@ class Sphere():
             ztot = np.concatenate((np.flip(z), z))
         return (ztot + z0, ytot)
 
-    def update_from_dict(self, dict_update):
-        for i in self.__class__.editable:
-            if i == materiaux:
-                pass
-            else:
-                setarr(self, i, dict_update[i])
-        
     def get_dict(self):
         # TODO gerer les materiaux
         # return un dict composer des info editable de l'objet
@@ -105,7 +117,7 @@ class Sphere():
         current_state = self.__dict__
         for i in self.__class__.editable:
             if i == "materiaux":
-                pass
+                d[i] = [m.nom for m in self.materiaux]
             else:
                 d[i] = current_state[i]
         return d
@@ -123,9 +135,14 @@ class Plan():
         self.R = om.matrice_rotation(*angles)
         self.materiaux = materiaux
         self.interaction = interaction
+
     def __repr__(self):
         return "Plan d'origine = {}".format(self.origine)
 
+    def repr_type(self):
+        for key, value in self.__dict__.items():
+            print("nom : {}, valeur : {}, type : {}"
+                  .format(key, value, type(value)))
 
     def F(self, P):
         """
@@ -174,10 +191,26 @@ class Plan():
         current_state = self.__dict__
         for i in self.__class__.editable:
             if i == "materiaux":
-                pass
+                d[i] = [m.nom for m in self.materiaux]
             else:
                 d[i] = current_state[i]
         return d
+
+    def update_from_dict(self, dict_update):
+        for i in self.__class__.editable:
+            if i == "materiaux":
+                l = []
+                for m in ast.literal_eval(dict_update[i].strip()):
+                    if m == 'AIR':
+                        l.append(oma.AIR)
+                    elif m == 'BK7':
+                        l.append(oma.BK7)
+            elif i == "interaction":
+                self.__dict__[i] = dict_update[i].strip()
+            else:
+                self.__dict__[i] = ast.literal_eval(dict_update[i].strip())
+
+
 
 # TODO fct represente qui regarde les rayons qui on traversé la surface
 #  en déduire la partie du dioptre à plot

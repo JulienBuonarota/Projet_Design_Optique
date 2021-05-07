@@ -25,12 +25,13 @@ O0 = np.array([0, 0, 0])
 plan_1 = osur.Plan(coeff=(0, 1, -1, 5), origine=O0)
 ## SPhere
 sphere_1 = osur.Sphere(R=50, origine=(0,0,20))
+sphere_3 = osur.Sphere(R=-50, origine=(0,0,30))
 sphere_2 = osur.Sphere(R=50, origine=(0,0,40), interaction="stop")
 ## rayon
-R = oray.Rayon.creation_champ(10, 20, 0, 1, 500, 0, np.array((0,5,0)))
+R = oray.Rayon.creation_champ(10, 20, 0, 1, 500, 0, np.array((0,0,0)))
 ## Creation system
 system = osys.system_optique("aaa", "()")
-system.dioptres = [plan_1, sphere_1, sphere_2]
+system.dioptres = [plan_1, sphere_1, sphere_3, sphere_2]
 system.rayon = R
 ## propagation des rayons
 system.propagation()
