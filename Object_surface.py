@@ -7,7 +7,7 @@ import Object_materiaux as oma
 
 ## Sphere
 class Sphere():
-    # list of editable elemenrts of this class
+    # list of editable elements of this class
     editable = ["rayon", "origine", "angles", "materiaux", "interaction"]
     
     def __init__(self, R=10, materiaux=[oma.AIR, oma.BK7], origine=(0, 0, 0), angles=(0, 0, 0), interaction="refraction"):

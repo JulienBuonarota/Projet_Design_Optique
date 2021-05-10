@@ -1,17 +1,14 @@
 """
      Parametres d'etudes du system optique
 """
-# TODO creation d'une copie de ce fichier a l'initialisation du system
-
-
 # list des longueurs d'ondes d'etudes
-longueur_onde = [500]  # type: [float]
+longueur_onde = [500, 600]  # type: [float]
 longueur_onde_unite = "nm"  # type: string
 
 # Angles des rayons en entree du system, en deg
-champs = [0]  # type: [float]
+champs = [0, -20]  # type: [float]
 #   nb de rayons par unite
-champs_densite = 5 # type: int
+champs_densite = 5  # type: int
 
 
 """
