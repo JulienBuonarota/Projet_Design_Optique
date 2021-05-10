@@ -1,0 +1,4 @@
+| angles    | coeff        | interaction | materiaux      | origine      | type_surface |  rayon |
+| (0, 0, 0) | (1, 1, 1, 0) | reflexion   | ['AIR', 'BK7'] | (0, 0, 20)   | PLAN         |        |
+| (0, 0, 0) | (1, 1, 1, 0) | reflexion   | ['AIR', 'BK7'] | (0, -5, 20)  | PLAN         |        |
+| (0, 0, 0) |              | stop        | ['AIR', 'BK7'] | (0, 0, 60)   | SPHERE       | 1000.0 |

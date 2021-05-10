@@ -1,0 +1,4 @@
+angles|interaction|materiaux|origine|rayon|type_surface
+(0, 0, 0)|refraction|['AIR', 'BK7']|(0, 0, 0)|10.0|SPHERE
+(0, 0, 0)|refraction|['AIR', 'BK7']|(0, 0, 0)|10.0|SPHERE
+(0, 0, 0)|stop|['AIR', 'BK7']|(0, 0, 0)|1000.0|SPHERE

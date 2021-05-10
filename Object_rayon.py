@@ -22,7 +22,6 @@ class Rayon():
         self.__class__.instances.append(self)
         self.__class__.nb_calcule += 1
 
-
     def __repr__(self):
         try:
             return "rayon d'origine = {}, de direction {} et d'arrive = {}"\

@@ -41,8 +41,8 @@ def intersection(P0, C0, O0, R, F, Fp):
     p = -P1[2]/C1[2] + sn
     # coordonnées de l'intersection
     Pi = P1 + C1*p
-    
-    return Pi
+    Pi0 = np.matmul(R.T, Pi) + O0
+    return Pi0
 
 
 
@@ -70,7 +70,7 @@ def reflexion(P0, C0, O0, R, F, Fp, normal):
     P1s0 = P1 - P1[2] / C1[2] * C1
     # Calcul de l'intersection par algo de Newton-Raphson
     count = 0
-    nb_iter_max = 1000
+    nb_iter_max = 10000
     s = 0
     while True:
         P = P1s0 + C1 * s
@@ -83,13 +83,14 @@ def reflexion(P0, C0, O0, R, F, Fp, normal):
             raise RuntimeError("No intersection")
         count += 1
 
-        # parametre du chemin origine -> intersection
+    # parametre du chemin origine -> intersection
     p = -P1[2] / C1[2] + sn
     # coordonnées de l'intersection
     Pi = P1 + C1 * p
     # vecteur orthogonal a la surface F en Pi
     r = normal(Pi)
-
+    # TODO debug ici, voir si a et T sont coherent
+    #  peut etre avoir un plot de la normal pour checkecr le plot
     ## Find the change in direction of the ray refraction at surface S
     a = np.sum(C1*r) / np.sum(r*r)
     T = -2*a
@@ -190,13 +191,14 @@ def interaction(rayon, surface):
         rayon.set_arrive(arrive=Pf0, nb_surface_arrive=rayon.surface_origine+1)
         oray.Rayon(Pf0, Cp0, rayon.chemin, rayon.champ, rayon.longueur_onde, rayon.surface_origine + 1)
     elif surface.interaction == "reflexion":
-        # refraction
         Pf0, Cp0 = reflexion(rayon.origine, rayon.direction,
                              surface.origine, surface.R, surface.F, surface.Fp, surface.normal)
-        # creation du rayon refacter et arret du rayon existant
+        # creation du rayon reflechi et arret du rayon existant
         rayon.set_arrive(arrive=Pf0, nb_surface_arrive=rayon.surface_origine+1)
         oray.Rayon(Pf0, Cp0, rayon.chemin, rayon.champ, rayon.longueur_onde, rayon.surface_origine + 1)
     elif surface.interaction == "stop":
-        rayon.set_arrive(rayon.origine + 10 * rayon.direction, nb_surface_arrive=1)
+        Pf0 = intersection(rayon.origine, rayon.direction,
+                           surface.origine, surface.R, surface.F, surface.Fp)
+        rayon.set_arrive(Pf0, nb_surface_arrive=rayon.surface_origine + 1)
     else:
         print("la surface : {} \n n'est pas de type connu".format(surface))

@@ -182,7 +182,7 @@ class Plan():
         z_2 = -1/c * (-b*hauteur + d)
         z = np.linspace(min(z_1, z_2), max(z_1, z_2), 100)
         y = -1/b*(c*z + d) + y0
-        return (z + z0, -1/b*(c*z + d) + y0)
+        return (z + z0, y)
 
     def get_dict(self):
         # return un dict composer des info editable de l'objet
@@ -205,6 +205,7 @@ class Plan():
                         l.append(oma.AIR)
                     elif m == 'BK7':
                         l.append(oma.BK7)
+                self.__dict__[i] = l        
             elif i == "interaction":
                 self.__dict__[i] = dict_update[i].strip()
             else:

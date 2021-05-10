@@ -12,3 +12,8 @@ def matrice_rotation(alpha, beta, gamma):
                        [np.sin(alpha), 0, np.cos(alpha)]]).reshape((3, 3))
     return np.matmul(Rgamma, np.matmul(Rbeta, Ralpha))
 
+def rayon_centroid(X, Y):
+    Xm, Ym = [np.mean(X), np.mean(Y)]
+    rayon = np.mean(np.sqrt((X-Xm)**2 + (Y-Ym)**2))
+    return rayon
+    
