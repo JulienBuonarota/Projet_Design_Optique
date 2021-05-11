@@ -23,10 +23,17 @@ surface_stop.origine = list(surface_stop.origine)
 z0 = surface_stop.origine[2]
 # calcul taille spot selon axe z
 rayon_spot = []
-for i in np.linspace(-5, 5, 20):
-    surface_stop.origine[2] = surface_stop.origine[2] + i
+z = np.linspace(-5, 5, 20)
+for i in z:
+    
+    surface_stop.origine[2] = z0 + i
     spots = ssd.main(system)
+    print(len(system.rayon.instances))
     rayon_spot.append(oma.rayon_centroid(spots[:, 0], spots[:,1]))
+    # reset des rayons
+    system.rayon.instances = []
+    system.rayon.nb_calcul = 0
 
-plt.plot(np.linspace(-5, 5, 20) + zo, rayon_spot)
+
+plt.plot(z + z0, rayon_spot)
 plt.show()

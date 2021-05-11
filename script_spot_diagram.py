@@ -11,12 +11,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import Object_rayon as oray
 import Outils_math as oma
+import copy
 
 # TODO avoir le champ et longueur d'onde comme parametre d'entre du main et script
 
 def main(system):
     # creation des rayons selon x et y
-    origine = list(system.dioptres[0].origine)
+    origine = copy.deepcopy(system.dioptres[0].origine)
+    origine = list(origine)
     longueur_onde, champ = system.conf.longueur_onde, system.conf.champs
     for l in longueur_onde:
         for count, c in enumerate(champ):
