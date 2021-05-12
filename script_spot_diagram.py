@@ -11,6 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import Object_rayon as oray
 import Outils_math as oma
+import ast
 import copy
 
 # TODO avoir le champ et longueur d'onde comme parametre d'entre du main et script
@@ -65,18 +66,26 @@ if __name__ == "__main__":
     if args.longueur_onde is None:
         longueur_onde = [system.conf.longueur_onde[0]]
     else:
-        longueur_onde = args.longueur_onde
+        longueur_onde = ast.literal_eval(args.longueur_onde)
 
     if args.champ is None:
         champ = [system.conf.champs[0]]
     else:
-        champ = args.champ
-        
-    # calcul spot
+        # champ = args.champ
+        champ = ast.literal_eval(args.champ)
+
+        # calcul spot
     spots = main(system, longueur_onde, champ)
     rayon_spot = oma.rayon_centroid(spots[:, 0], spots[:,1])
+
+    # plot
+    colors = ['r', 'g', 'b', 'c', 'm', 'y', 'k']
+    style = ['*', '+', 'o']
+    combo = [i+j for i, j in zip(colors, style)]
     
-    plt.plot(spots[:, 0], spots[:, 1], 'o')
+    for count_l, l in enumerate(longueur_onde):
+        for count_c, c in enumerate(champ):
+            plt.plot(spots[:, 0], spots[:, 1], combo[count_l])
     plt.xlabel("x (en {})".format(system.conf.unite))
     plt.ylabel("y (en {})".format(system.conf.unite))
     plt.title("Spot diagram, r = {:1f} {}".format(rayon_spot, system.conf.unite))
