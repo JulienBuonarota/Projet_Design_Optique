@@ -16,4 +16,7 @@ def rayon_centroid(X, Y):
     Xm, Ym = [np.mean(X), np.mean(Y)]
     rayon = np.mean(np.sqrt((X-Xm)**2 + (Y-Ym)**2))
     return rayon
-    
+
+
+def test(t):
+    return t
