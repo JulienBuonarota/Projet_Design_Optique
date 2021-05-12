@@ -12,7 +12,7 @@ class Materiaux():
         return self.n0 + self.a*(l - self.l0)
 
 AIR = Materiaux(1, 1, 0, "AIR")
-BK7 = Materiaux(1.4281, 500, 10**(-3), "BK7")
+BK7 = Materiaux(1.4281, 500, 10**(-4), "BK7")
 
 if __name__ == "__main__":
     print(AIR.__instance__)

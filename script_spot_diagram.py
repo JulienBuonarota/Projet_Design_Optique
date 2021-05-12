@@ -49,7 +49,7 @@ if __name__ == "__main__":
                         help="Dossier contenant l'ensemble des fichiers du system",
                         required=True)
     parser.add_argument("-c", "--champ",
-                    help="Champ d'etudes, en degrees")
+                        help="Champ d'etudes, en degrees")
     parser.add_argument("-l", "--longueur_onde",
                         help="Longueur d'onde d'etudes, en nm")
 
