@@ -27,8 +27,6 @@ class system_optique():
         self.system_string = system_string
         self.conf = configuration_system
 
-
-
     def creation_rayons(self, longueur_onde, champ):
         for l in longueur_onde:
             for count, c in enumerate(champ):
