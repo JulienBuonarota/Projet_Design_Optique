@@ -11,7 +11,6 @@ parser = argparse.ArgumentParser(prefix_chars='-')
 parser.add_argument("-d", "--dossier",
                     help="Dossier contenant l'ensemble des fichiers du system",
                     required=True)
-args = parser.parse_args()
 
 ##  creation du system optique a partir des deux fichiers csv
 system = osys.system_optique(args.dossier, "")

@@ -15,11 +15,11 @@ import copy
 
 # TODO avoir le champ et longueur d'onde comme parametre d'entre du main et script
 
-def main(system):
+def main(system, longueur_onde, champ):
     # creation des rayons selon x et y
     origine = copy.deepcopy(system.dioptres[0].origine)
     origine = list(origine)
-    longueur_onde, champ = system.conf.longueur_onde, system.conf.champs
+    # longueur_onde, champ = system.conf.longueur_onde, system.conf.champs
     for l in longueur_onde:
         for count, c in enumerate(champ):
             for i in np.linspace(-5, 5, 10):
@@ -48,13 +48,32 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--dossier",
                         help="Dossier contenant l'ensemble des fichiers du system",
                         required=True)
+    parser.add_argument("-c", "--champ",
+                    help="Champ d'etudes, en degrees")
+    parser.add_argument("-l", "--longueur_onde",
+                        help="Longueur d'onde d'etudes, en nm")
+
     args = parser.parse_args()
     
+
+        
     ##  creation du system optique a partir des deux fichiers csv
     system = osys.system_optique(args.dossier, "")
     system.read_csv_dioptres()
+
+    # test argument optionel
+    if args.longueur_onde is None:
+        longueur_onde = [system.conf.longueur_onde[0]]
+    else:
+        longueur_onde = args.longueur_onde
+
+    if args.champ is None:
+        champ = [system.conf.champs[0]]
+    else:
+        champ = args.champ
+        
     # calcul spot
-    spots = main(system)
+    spots = main(system, longueur_onde, champ)
     rayon_spot = oma.rayon_centroid(spots[:, 0], spots[:,1])
     
     plt.plot(spots[:, 0], spots[:, 1], 'o')
